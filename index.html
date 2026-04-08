@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LinkedIn & Sales Outreach Tools — Comparison Dashboard</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2230;
+    --border: #2a3347;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --li:  #0a66c2;
+    --cog: #22c55e;
+    --ma:  #f97316;
+    --att: #a855f7;
+    --clv: #ef4444;
+    --pb:  #eab308;
+    --ds:  #14b8a6;
+    --radius: 8px;
+    font-size: 15px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 60%, #1a2035 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(10,102,194,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: .25rem .8rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+  }
+  .hero h1 span { color: #0a66c2; }
+  .hero-sub {
+    margin-top: .5rem;
+    color: var(--muted);
+    font-size: .95rem;
+    font-weight: 500;
+  }
+  .hero-meta {
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: .35rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 2.5rem 0; }
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-wrap {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: .9rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .filter-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: .4rem;
+  }
+  .filter-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .18s ease;
+  }
+  .filter-btn:hover { border-color: #0a66c2; color: var(--text); }
+  .filter-btn.active { background: #0a66c2; border-color: #0a66c2; color: #fff; }
+
+  /* ── TOOL CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1rem;
+  }
+  .tool-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: transform .18s, border-color .18s, box-shadow .18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  }
+  .tool-card.hidden { display: none; }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; margin-bottom: .85rem; }
+  .card-name { font-size: 1.05rem; font-weight: 700; }
+  .badge {
+    font-size: .68rem;
+    font-weight: 700;
+    padding: .2rem .6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    letter-spacing: .04em;
+  }
+  .badge-type { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
+  .badge-trial { background: rgba(34,197,94,.12); color: #22c55e; border: 1px solid rgba(34,197,94,.25); }
+  .badge-notrial { background: rgba(239,68,68,.1); color: #ef4444; border: 1px solid rgba(239,68,68,.2); }
+  .card-price {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .card-price-sub { font-size: .72rem; color: var(--muted); margin-top: .15rem; font-weight: 500; }
+  .card-bestfor {
+    font-size: .8rem;
+    color: var(--muted);
+    margin: .75rem 0 .85rem;
+    line-height: 1.45;
+  }
+  .card-bestfor strong { color: var(--text); }
+  .pills { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .pill {
+    font-size: .68rem;
+    font-weight: 600;
+    padding: .2rem .55rem;
+    border-radius: 4px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .pill.accent { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+  .card-channels {
+    margin-top: .75rem;
+    font-size: .75rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .card-channels strong { color: var(--text); }
+
+  /* ── COMPARISON TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .82rem;
+    min-width: 900px;
+  }
+  thead th {
+    background: var(--bg2);
+    padding: .75rem 1rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: .78rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
+  }
+  thead th.tool-col {
+    color: var(--text);
+    font-size: .82rem;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  thead th .th-accent { display: block; width: 100%; height: 2px; border-radius: 2px; background: var(--accent); margin-bottom: .4rem; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,.02); }
+  tbody tr:hover { background: rgba(255,255,255,.05); }
+  td {
+    padding: .7rem 1rem;
+    vertical-align: top;
+    line-height: 1.45;
+    color: var(--text);
+  }
+  td.row-label {
+    font-weight: 700;
+    color: var(--muted);
+    font-size: .75rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background: var(--bg2);
+    min-width: 160px;
+  }
+  td.highlight { color: var(--accent); font-weight: 600; }
+
+  /* ── PRICING VISUAL ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .pricing-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.2rem;
+    transition: border-color .18s;
+  }
+  .pricing-card:hover { border-color: var(--accent); }
+  .pricing-card .tool-name { font-weight: 700; font-size: .92rem; margin-bottom: .7rem; color: var(--accent); }
+  .tier-row { display: flex; align-items: center; gap: .6rem; margin-bottom: .45rem; }
+  .tier-label { font-size: .7rem; color: var(--muted); width: 60px; flex-shrink: 0; font-weight: 600; }
+  .tier-bar-wrap { flex: 1; background: var(--bg3); border-radius: 3px; height: 8px; overflow: hidden; }
+  .tier-bar { height: 100%; border-radius: 3px; background: var(--accent); transition: width .6s ease; }
+  .tier-price { font-size: .72rem; font-weight: 700; color: var(--text); white-space: nowrap; }
+
+  /* ── BEST FOR ── */
+  .bestfor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .bestfor-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    transition: border-color .18s, transform .18s;
+  }
+  .bestfor-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .bestfor-role {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .5rem;
+  }
+  .bestfor-tool {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: .4rem;
+  }
+  .bestfor-reason { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .bestfor-secondary {
+    margin-top: .7rem;
+    font-size: .72rem;
+    color: var(--muted);
+  }
+  .bestfor-secondary span { color: var(--text); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: .75rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 1.8rem 1rem 1.5rem; }
+    section { padding: 1.8rem 0; }
+    .filter-wrap { padding: .7rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Competitive Intelligence Report</div>
+  <h1>LinkedIn &amp; <span>Sales Outreach</span> Tools<br/>Comparison Dashboard</h1>
+  <p class="hero-sub">2026 Edition &nbsp;·&nbsp; 7 Platforms Evaluated</p>
+  <div class="hero-meta">
+    <span><span class="dot" style="background:var(--li)"></span>LinkedIn Sales Nav</span>
+    <span><span class="dot" style="background:var(--cog)"></span>Cognism</span>
+    <span><span class="dot" style="background:var(--ma)"></span>Meet Alfred</span>
+    <span><span class="dot" style="background:var(--att)"></span>Attio</span>
+    <span><span class="dot" style="background:var(--clv)"></span>Cleverly</span>
+    <span><span class="dot" style="background:var(--pb)"></span>PhantomBuster</span>
+    <span><span class="dot" style="background:var(--ds)"></span>Dux-Soup</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-wrap">
+  <div class="filter-inner">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-filter="all">All Tools</button>
+    <button class="filter-btn" data-filter="budget">💰 Budget-Friendly (&lt;$60/mo)</button>
+    <button class="filter-btn" data-filter="free">✅ Has Free Plan/Trial</button>
+    <button class="filter-btn" data-filter="multichannel">📡 Multi-Channel</button>
+    <button class="filter-btn" data-filter="ai">🤖 AI-Powered</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOOL CARDS -->
+  <section>
+    <div class="section-title">Tool Overview</div>
+    <div class="cards-grid" id="cardsGrid">
+
+      <!-- LinkedIn Sales Navigator -->
+      <div class="tool-card" style="--accent:var(--li)" data-tags="free ai">
+        <div class="card-header">
+          <div class="card-name">LinkedIn Sales Navigator</div>
+          <span class="badge badge-type">Native SaaS</span>
+        </div>
+        <div class="card-price">$119.99</div>
+        <div class="card-price-sub">/ mo (Core, billed monthly)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> B2B sales reps doing LinkedIn prospecting at scale</div>
+        <div class="pills">
+          <span class="pill accent">AI Lead Insights</span>
+          <span class="pill">50+ Filters</span>
+          <span class="pill">Buyer Intent</span>
+          <span class="pill">InMail 50/mo</span>
+          <span class="pill">Relationship Map</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> LinkedIn InMail only</div>
+      </div>
+
+      <!-- Cognism -->
+      <div class="tool-card" style="--accent:var(--cog)" data-tags="ai">
+        <div class="card-header">
+          <div class="card-name">Cognism</div>
+          <span class="badge badge-type">Data Platform</span>
+        </div>
+        <div class="card-price">Custom</div>
+        <div class="card-price-sub">Quote required (Grow &amp; Elevate)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> SDR teams needing verified, GDPR-safe contact data</div>
+        <div class="pills">
+          <span class="pill accent">Diamond Data®</span>
+          <span class="pill">GDPR/CCPA</span>
+          <span class="pill">Intent Signals</span>
+          <span class="pill">Verified Mobiles</span>
+          <span class="pill">Bombora Intent</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> Data only — no outreach tool</div>
+      </div>
+
+      <!-- Meet Alfred -->
+      <div class="tool-card" style="--accent:var(--ma)" data-tags="budget free multichannel ai">
+        <div class="card-header">
+          <div class="card-name">Meet Alfred</div>
+          <span class="badge badge-type">Automation SaaS</span>
+        </div>
+        <div class="card-price">$29</div>
+        <div class="card-price-sub">/ user/mo (Basic, billed annually)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> Individuals &amp; teams automating multi-channel outreach</div>
+        <div class="pills">
+          <span class="pill accent">Multi-Channel Seq.</span>
+          <span class="pill">AI Personalization</span>
+          <span class="pill">Smart Inbox</span>
+          <span class="pill">Lead Finder</span>
+          <span class="pill">White Label</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> LinkedIn + Email + X (Twitter)</div>
+      </div>
+
+      <!-- Attio -->
+      <div class="tool-card" style="--accent:var(--att)" data-tags="budget free ai">
+        <div class="card-header">
+          <div class="card-name">Attio</div>
+          <span class="badge badge-type">AI CRM</span>
+        </div>
+        <div class="card-price">Free</div>
+        <div class="card-price-sub">Plus from $29/user/mo (annual)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> Startups &amp; scale-ups wanting a flexible modern CRM</div>
+        <div class="pills">
+          <span class="pill accent">Ask Attio AI</span>
+          <span class="pill">ICP Fit Analysis</span>
+          <span class="pill">MCP Server</span>
+          <span class="pill">Workflows</span>
+          <span class="pill">ISO Certified</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> Email sequences via CRM</div>
+      </div>
+
+      <!-- Cleverly -->
+      <div class="tool-card" style="--accent:var(--clv)" data-tags="multichannel ai">
+        <div class="card-header">
+          <div class="card-name">Cleverly</div>
+          <span class="badge badge-type">Managed Agency</span>
+        </div>
+        <div class="card-price">$397</div>
+        <div class="card-price-sub">/ mo (Social Outreach plan)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> Companies wanting fully managed outreach campaigns</div>
+        <div class="pills">
+          <span class="pill accent">Done-For-You</span>
+          <span class="pill">Acct Manager</span>
+          <span class="pill">A/B Testing</span>
+          <span class="pill">Inbox Mgmt</span>
+          <span class="pill">Cold Calling</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> LinkedIn + Cold Email + Cold Calling</div>
+      </div>
+
+      <!-- PhantomBuster -->
+      <div class="tool-card" style="--accent:var(--pb)" data-tags="budget free multichannel ai">
+        <div class="card-header">
+          <div class="card-name">PhantomBuster</div>
+          <span class="badge badge-type">Automation SaaS</span>
+        </div>
+        <div class="card-price">$56</div>
+        <div class="card-price-sub">/ mo (Start plan, billed annually)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> Tech-savvy teams needing data scraping &amp; automation</div>
+        <div class="pills">
+          <span class="pill accent">100+ Phantoms</span>
+          <span class="pill">15+ Platforms</span>
+          <span class="pill">AI Messaging</span>
+          <span class="pill">Real-time Data</span>
+          <span class="pill">HubSpot Sync</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> LinkedIn + 15+ platforms</div>
+      </div>
+
+      <!-- Dux-Soup -->
+      <div class="tool-card" style="--accent:var(--ds)" data-tags="budget free ai">
+        <div class="card-header">
+          <div class="card-name">Dux-Soup</div>
+          <span class="badge badge-type">Chrome Ext + Cloud</span>
+        </div>
+        <div class="card-price">$11.25</div>
+        <div class="card-price-sub">/ mo (Pro Dux, billed annually)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> Individuals &amp; teams automating LinkedIn lead gen cost-effectively</div>
+        <div class="pills">
+          <span class="pill accent">Drip Campaigns</span>
+          <span class="pill">Profile Visits</span>
+          <span class="pill">Safety Limits</span>
+          <span class="pill">CRM Sync</span>
+          <span class="pill">Agency Plans</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> LinkedIn only</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FULL COMPARISON TABLE -->
+  <section>
+    <div class="section-title">Full Feature Comparison</div>
+    <div class="table-wrap">
+      <table id="compTable">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th class="tool-col" style="--accent:var(--li)"><span class="th-accent"></span>Sales Nav</th>
+            <th class="tool-col" style="--accent:var(--cog)"><span class="th-accent"></span>Cognism</th>
+            <th class="tool-col" style="--accent:var(--ma)"><span class="th-accent"></span>Meet Alfred</th>
+            <th class="tool-col" style="--accent:var(--att)"><span class="th-accent"></span>Attio</th>
+            <th class="tool-col" style="--accent:var(--clv)"><span class="th-accent"></span>Cleverly</th>
+            <th class="tool-col" style="--accent:var(--pb)"><span class="th-accent"></span>PhantomBuster</th>
+            <th class="tool-col" style="--accent:var(--ds)"><span class="th-accent"></span>Dux-Soup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Primary Use Case</td>
+            <td>LinkedIn prospecting &amp; lead search</td>
+            <td>B2B contact data &amp; intent signals</td>
+            <td>Multi-channel LinkedIn automation</td>
+            <td>AI-powered CRM</td>
+            <td>Done-for-you B2B lead gen</td>
+            <td>Multi-platform data extraction</td>
+            <td>LinkedIn automation &amp; lead gen</td>
+          </tr>
+          <tr>
+            <td class="row-label">Product Type</td>
+            <td>SaaS (LinkedIn native)</td>
+            <td>SaaS data platform + browser ext.</td>
+            <td>SaaS automation tool</td>
+            <td>SaaS CRM</td>
+            <td>Managed service (agency)</td>
+            <td>SaaS automation tool</td>
+            <td>Chrome extension + cloud</td>
+          </tr>
+          <tr>
+            <td class="row-label">LinkedIn Integration</td>
+            <td class="highlight" style="color:var(--li)">Native — built into LinkedIn</td>
+            <td>Browser extension overlay</td>
+            <td class="highlight" style="color:var(--ma)">Deep — automates actions</td>
+            <td>Profile enrichment / data sync</td>
+            <td>LinkedIn outreach managed for you</td>
+            <td>Scrapes &amp; automates LinkedIn</td>
+            <td class="highlight" style="color:var(--ds)">Deep — automates directly</td>
+          </tr>
+          <tr>
+            <td class="row-label">Outreach Channels</td>
+            <td>LinkedIn InMail only</td>
+            <td style="color:var(--muted)">Data only — no outreach</td>
+            <td class="highlight" style="color:var(--ma)">LinkedIn + Email + X</td>
+            <td>Email sequences (CRM)</td>
+            <td class="highlight" style="color:var(--clv)">LinkedIn + Email + Cold Call</td>
+            <td class="highlight" style="color:var(--pb)">LinkedIn + 15+ platforms</td>
+            <td>LinkedIn only</td>
+          </tr>
+          <tr>
+            <td class="row-label">AI Capabilities</td>
+            <td>Account IQ, Lead IQ, Message Assist (beta)</td>
+            <td>Intent data (Bombora), signals</td>
+            <td>AI personalization, configurable AI</td>
+            <td class="highlight" style="color:var(--att)">Ask Attio agent, ICP scoring</td>
+            <td>AI personalization (Cold Email plan)</td>
+            <td>AI filtering &amp; AI message writing</td>
+            <td style="color:var(--muted)">Limited — activity-based</td>
+          </tr>
+          <tr>
+            <td class="row-label">CRM / Integrations</td>
+            <td>Salesforce, HubSpot, Dynamics, Oracle</td>
+            <td>Salesforce, HubSpot, Outreach, APIs</td>
+            <td>Zapier, LinkedIn, Email, Twitter, FB, IG</td>
+            <td class="highlight" style="color:var(--att)">IS the CRM; API, MCP, Zapier, DW</td>
+            <td>Direct CRM integration</td>
+            <td>HubSpot, Zapier, Make, n8n, Salesforce</td>
+            <td>Salesforce, HubSpot, Pipedrive, Zapier, Make</td>
+          </tr>
+          <tr>
+            <td class="row-label">Free Plan / Trial</td>
+            <td>✅ Free trial</td>
+            <td>❌ No public plan; quote only</td>
+            <td>✅ 7-day free trial</td>
+            <td class="highlight" style="color:var(--att)">✅ Free plan (up to 3 seats)</td>
+            <td>❌ No trial (managed service)</td>
+            <td>✅ 14-day free trial</td>
+            <td>✅ 14-day free trial</td>
+          </tr>
+          <tr>
+            <td class="row-label">Starting Price</td>
+            <td>$119.99/mo</td>
+            <td>Custom quote</td>
+            <td>$29/user/mo (annual)</td>
+            <td>Free → $29/user/mo (annual)</td>
+            <td>$397/mo</td>
+            <td>$56/mo (annual)</td>
+            <td class="highlight" style="color:var(--ds)">$11.25/mo (annual)</td>
+          </tr>
+          <tr>
+            <td class="row-label">Pricing Model</td>
+            <td>Per seat</td>
+            <td>Custom / quote-based</td>
+            <td>Per user/month</td>
+            <td>Per user/month</td>
+            <td>Per campaign / service</td>
+            <td class="highlight" style="color:var(--pb)">Per workspace (unlimited users)</td>
+            <td>Per user/month</td>
+          </tr>
+          <tr>
+            <td class="row-label">Top-Tier / Enterprise</td>
+            <td>Advanced Plus (custom)</td>
+            <td>Elevate (custom)</td>
+            <td>Team $39/user/mo (annual)</td>
+            <td>Enterprise (custom)</td>
+            <td>Cold Call $3,995/mo</td>
+            <td>Scale $352/mo (annual)</td>
+            <td>Cloud Dux $74.17/mo (annual)</td>
+          </tr>
+          <tr>
+            <td class="row-label">Team / Agency</td>
+            <td>✅ Multi-seat, Admin Center</td>
+            <td>✅ Seat-based, team workflows</td>
+            <td>✅ Team inbox, roles, white label</td>
+            <td>✅ Teams, advanced permissions</td>
+            <td>✅ Dedicated account manager</td>
+            <td>✅ Unlimited users on all plans</td>
+            <td>✅ Team &amp; agency plans</td>
+          </tr>
+          <tr>
+            <td class="row-label">Data Compliance</td>
+            <td>LinkedIn native (platform ToS)</td>
+            <td class="highlight" style="color:var(--cog)">GDPR, CCPA, DNC 15+ countries</td>
+            <td>Cloud-based, GDPR policy</td>
+            <td class="highlight" style="color:var(--att)">GDPR, CCPA, ISO certified</td>
+            <td style="color:var(--muted)">Not specified</td>
+            <td>GDPR-compliant, no fake profiles</td>
+            <td>Safety limits built-in</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PRICING VISUAL -->
+  <section>
+    <div class="section-title">Pricing Tiers — Entry to Enterprise</div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card" style="--accent:var(--li)">
+        <div class="tool-name">LinkedIn Sales Navigator</div>
+        <div class="tier-row">
+          <span class="tier-label">Core</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:30%"></div></div>
+          <span class="tier-price">$119.99/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Adv.</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:55%"></div></div>
+          <span class="tier-price">~$179/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Enterprise</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:85%"></div></div>
+          <span class="tier-price">Custom</span>
+        </div>
+      </div>
+
+      <div class="pricing-card" style="--accent:var(--cog)">
+        <div class="tool-name">Cognism</div>
+        <div class="tier-row">
+          <span class="tier-label">Grow</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:50%"></div></div>
+          <span class="tier-price">Custom</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Elevate</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:85%"></div></div>
+          <span class="tier-price">Custom</span>
+        </div>
+      </div>
+
+      <div class="pricing-card" style="--accent:var(--ma)">
+        <div class="tool-name">Meet Alfred</div>
+        <div class="tier-row">
+          <span class="tier-label">Basic</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:15%"></div></div>
+          <span class="tier-price">$29/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Advanced</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:25%"></div></div>
+          <span class="tier-price">~$37/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Team</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:35%"></div></div>
+          <span class="tier-price">$39/user/mo</span>
+        </div>
+      </div>
+
+      <div class="pricing-card" style="--accent:var(--att)">
+        <div class="tool-name">Attio</div>
+        <div class="tier-row">
+          <span class="tier-label">Free</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:5%"></div></div>
+          <span class="tier-price">$0</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Plus</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:15%"></div></div>
+          <span class="tier-price">$29/user/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Enterprise</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:75%"></div></div>
+          <span class="tier-price">Custom</span>
+        </div>
+      </div>
+
+      <div class="pricing-card" style="--accent:var(--clv)">
+        <div class="tool-name">Cleverly</div>
+        <div class="tier-row">
+          <span class="tier-label">Social</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:20%"></div></div>
+          <span class="tier-price">$397/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Cold Email</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:55%"></div></div>
+          <span class="tier-price">~$597/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Cold Call</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:100%"></div></div>
+          <span class="tier-price">$3,995/mo</span>
+        </div>
+      </div>
+
+      <div class="pricing-card" style="--accent:var(--pb)">
+        <div class="tool-name">PhantomBuster</div>
+        <div class="tier-row">
+          <span class="tier-label">Start</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:16%"></div></div>
+          <span class="tier-price">$56/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Pro</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:38%"></div></div>
+          <span class="tier-price">$128/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Scale</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:100%"></div></div>
+          <span class="tier-price">$352/mo</span>
+        </div>
+      </div>
+
+      <div class="pricing-card" style="--accent:var(--ds)">
+        <div class="tool-name">Dux-Soup</div>
+        <div class="tier-row">
+          <span class="tier-label">Pro Dux</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:10%"></div></div>
+          <span class="tier-price">$11.25/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Turbo</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:40%"></div></div>
+          <span class="tier-price">~$41/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Cloud</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:65%"></div></div>
+          <span class="tier-price">$74.17/mo</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BEST FOR -->
+  <section>
+    <div class="section-title">Role-Based Recommendations</div>
+    <div class="bestfor-grid">
+
+      <div class="bestfor-card" style="--accent:var(--ds)">
+        <div class="bestfor-role">Solo SDR / Freelancer</div>
+        <div class="bestfor-tool">Dux-Soup</div>
+        <div class="bestfor-reason">Lowest entry price ($11.25/mo), LinkedIn-native drip campaigns, safety limits to stay compliant. Perfect for individuals who need cost-effective LinkedIn automation without complexity.</div>
+        <div class="bestfor-secondary">Runner-up: <span>PhantomBuster</span> (Start plan $56/mo — more platforms)</div>
+      </div>
+
+      <div class="bestfor-card" style="--accent:var(--pb)">
+        <div class="bestfor-role">Tech-Savvy Growth Team</div>
+        <div class="bestfor-tool">PhantomBuster</div>
+        <div class="bestfor-reason">100+ pre-built automations, 15+ platforms, unlimited users on all plans. Ideal for scraping, enrichment, and multi-step workflows across LinkedIn, Sales Nav, and beyond.</div>
+        <div class="bestfor-secondary">Runner-up: <span>Meet Alfred</span> (simpler multi-channel sequences)</div>
+      </div>
+
+      <div class="bestfor-card" style="--accent:var(--ma)">
+        <div class="bestfor-role">Small Team / Multi-Channel</div>
+        <div class="bestfor-tool">Meet Alfred</div>
+        <div class="bestfor-reason">$29/user/mo with LinkedIn + Email + Twitter sequences, Smart Inbox, AI personalization, and white-label options. Best all-in-one automation for small outreach teams.</div>
+        <div class="bestfor-secondary">Runner-up: <span>PhantomBuster</span> (wider platform reach)</div>
+      </div>
+
+      <div class="bestfor-card" style="--accent:var(--li)">
+        <div class="bestfor-role">Enterprise Sales Rep</div>
+        <div class="bestfor-tool">LinkedIn Sales Navigator</div>
+        <div class="bestfor-reason">Native LinkedIn integration, 50+ filters, Buyer Intent data, Relationship Map, and deep CRM sync with Salesforce/HubSpot. The gold standard for enterprise LinkedIn prospecting.</div>
+        <div class="bestfor-secondary">Pair with: <span>Cognism</span> for verified phone numbers</div>
+      </div>
+
+      <div class="bestfor-card" style="--accent:var(--att)">
+        <div class="bestfor-role">Startup / Modern CRM</div>
+        <div class="bestfor-tool">Attio</div>
+        <div class="bestfor-reason">Free up to 3 seats, AI agent (Ask Attio), ICP fit scoring, MCP server, GDPR/ISO certified. The most flexible modern CRM for startups that want AI built-in from day one.</div>
+        <div class="bestfor-secondary">Runner-up: <span>Meet Alfred</span> (more outreach channels)</div>
+      </div>
+
+      <div class="bestfor-card" style="--accent:var(--clv)">
+        <div class="bestfor-role">Agency / No-Touch Outreach</div>
+        <div class="bestfor-tool">Cleverly</div>
+        <div class="bestfor-reason">Fully managed campaigns with a dedicated account manager, inbox management, and A/B testing. Pay for results, not tools — ideal if you want lead gen done for you.</div>
+        <div class="bestfor-secondary">Note: starts at $397/mo — no free trial</div>
+      </div>
+
+      <div class="bestfor-card" style="--accent:var(--cog)">
+        <div class="bestfor-role">Data-Heavy SDR Team</div>
+        <div class="bestfor-tool">Cognism</div>
+        <div class="bestfor-reason">Verified mobile numbers, GDPR/CCPA compliance across 15+ countries, Bombora intent signals, and Diamond Data® for hard-to-find contacts. Best pure data provider in the set.</div>
+        <div class="bestfor-secondary">Pair with: <span>Sales Navigator</span> or <span>Meet Alfred</span> for outreach</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div>Data current as of early 2026 &nbsp;·&nbsp; Pricing subject to change — verify with vendors &nbsp;·&nbsp; For internal use only</div>
+</footer>
+
+<script>
+  // Filter logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.tool-card');
+  const tableRows = document.querySelectorAll('#compTable tbody tr');
+
+  // Map filter -> tool indices (0-based)
+  const filterMap = {
+    all:          [0,1,2,3,4,5,6],
+    budget:       [2,3,5,6],       // <$60/mo: Meet Alfred ($29), Attio ($0-$29), PhantomBuster ($56), Dux-Soup ($11.25)
+    free:         [0,2,3,5,6],     // free trial or free plan
+    multichannel: [2,4,5],         // Meet Alfred, Cleverly, PhantomBuster
+    ai:           [0,1,2,3,4,5],   // all except Dux-Soup (limited AI)
+  };
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const f = btn.dataset.filter;
+      const visible = filterMap[f] || filterMap.all;
+
+      cards.forEach((card, i) => {
+        card.classList.toggle('hidden', !visible.includes(i));
+      });
+
+      // Also grey out table columns
+      const allCols = document.querySelectorAll('#compTable thead th');
+      const allTds  = document.querySelectorAll('#compTable tbody td');
+
+      if (f === 'all') {
+        allCols.forEach(c => c.style.opacity = '');
+        allTds.forEach(c => c.style.opacity = '');
+        return;
+      }
+
+      // col indices in table: 0=label, 1=SalesNav, 2=Cognism, 3=Alfred, 4=Attio, 5=Cleverly, 6=PB, 7=DuxSoup
+      const colVisible = visible.map(i => i + 1); // offset by 1 for label col
+
+      allCols.forEach((c, ci) => {
+        if (ci === 0) return;
+        c.style.opacity = colVisible.includes(ci) ? '' : '0.3';
+      });
+
+      tableRows.forEach(row => {
+        const tds = row.querySelectorAll('td');
+        tds.forEach((td, ti) => {
+          if (ti === 0) return;
+          td.style.opacity = colVisible.includes(ti) ? '' : '0.3';
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
