@@ -216,6 +216,80 @@
     gap: .4rem;
   }
   .card-channels strong { color: var(--text); }
+  .card-trial {
+    margin-top: .65rem;
+    padding: .55rem .7rem;
+    border-radius: 5px;
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+  }
+  .card-trial.has-trial { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2); color: #22c55e; }
+  .card-trial.no-trial  { background: rgba(239,68,68,.07); border: 1px solid rgba(239,68,68,.18); color: #ef4444; }
+  .card-trial.free-plan { background: rgba(168,85,247,.09); border: 1px solid rgba(168,85,247,.25); color: #a855f7; }
+  .card-trial-icon { font-size: .9rem; flex-shrink: 0; margin-top: .05rem; }
+  .card-trial-body { display: flex; flex-direction: column; gap: .15rem; }
+  .card-trial-label { font-weight: 800; font-size: .73rem; }
+  .card-trial-note { font-weight: 500; opacity: .85; font-size: .7rem; }
+  .card-risk {
+    margin-top: .6rem;
+    padding: .45rem .7rem;
+    border-radius: 5px;
+    font-size: .73rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    border: 1px solid;
+  }
+  .card-risk-bar { display: flex; gap: 3px; }
+  .card-risk-bar span { width: 10px; height: 10px; border-radius: 2px; }
+  .risk-zero    { background: rgba(34,197,94,.07);  border-color: rgba(34,197,94,.2);  color: #22c55e; }
+  .risk-low     { background: rgba(132,204,22,.07); border-color: rgba(132,204,22,.2); color: #84cc16; }
+  .risk-moderate{ background: rgba(234,179,8,.08);  border-color: rgba(234,179,8,.25); color: #eab308; }
+  .risk-high    { background: rgba(249,115,22,.08); border-color: rgba(249,115,22,.25);color: #f97316; }
+  .risk-very-high{ background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.25); color: #ef4444; }
+
+  /* ── RISK SECTION ── */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .risk-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.2rem;
+    border-left: 4px solid var(--accent);
+  }
+  .risk-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; }
+  .risk-card-name { font-weight: 700; font-size: .92rem; }
+  .risk-label {
+    font-size: .68rem;
+    font-weight: 800;
+    padding: .2rem .6rem;
+    border-radius: 4px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .risk-dots { display: flex; gap: 4px; margin-bottom: .6rem; }
+  .risk-dots span { width: 14px; height: 14px; border-radius: 3px; }
+  .dot-fill   { background: var(--accent); }
+  .dot-empty  { background: var(--bg3); border: 1px solid var(--border); }
+  .risk-summary { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+  .risk-summary strong { color: var(--text); }
+  .risk-note {
+    margin-top: .55rem;
+    font-size: .7rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: .5rem;
+    font-style: italic;
+  }
 
   /* ── COMPARISON TABLE ── */
   .table-wrap {
@@ -400,6 +474,17 @@
           <span class="pill">Relationship Map</span>
         </div>
         <div class="card-channels"><strong>Channels:</strong> LinkedIn InMail only</div>
+        <div class="card-trial has-trial">
+          <span class="card-trial-icon">🎁</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">30-Day Free Trial</span>
+            <span class="card-trial-note">Full Core access · No CC sometimes required · Can't stack with LinkedIn Premium</span>
+          </div>
+        </div>
+        <div class="card-risk risk-zero">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div>
+          <span>Ban Risk: <strong>Zero</strong> — LinkedIn native, zero risk</span>
+        </div>
       </div>
 
       <!-- Cognism -->
@@ -419,6 +504,17 @@
           <span class="pill">Bombora Intent</span>
         </div>
         <div class="card-channels"><strong>Channels:</strong> Data only — no outreach tool</div>
+        <div class="card-trial no-trial">
+          <span class="card-trial-icon">📞</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">No Public Trial</span>
+            <span class="card-trial-note">Demo call required · Custom quote only · No self-serve signup</span>
+          </div>
+        </div>
+        <div class="card-risk risk-zero">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div>
+          <span>Ban Risk: <strong>Zero</strong> — data export only, never touches LinkedIn</span>
+        </div>
       </div>
 
       <!-- Meet Alfred -->
@@ -438,6 +534,17 @@
           <span class="pill">White Label</span>
         </div>
         <div class="card-channels"><strong>Channels:</strong> LinkedIn + Email + X (Twitter)</div>
+        <div class="card-trial has-trial">
+          <span class="card-trial-icon">🎁</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">7-Day Free Trial</span>
+            <span class="card-trial-note">No CC required · Full feature access · Auto-renews at $29/user/mo</span>
+          </div>
+        </div>
+        <div class="card-risk risk-moderate">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span></div>
+          <span>Ban Risk: <strong>Moderate</strong> — cloud automation, mimics human behavior</span>
+        </div>
       </div>
 
       <!-- Attio -->
@@ -457,6 +564,17 @@
           <span class="pill">ISO Certified</span>
         </div>
         <div class="card-channels"><strong>Channels:</strong> Email sequences via CRM</div>
+        <div class="card-trial free-plan">
+          <span class="card-trial-icon">✨</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">Free Plan — Forever</span>
+            <span class="card-trial-note">Up to 3 seats, no CC required · Not a trial — permanently free tier</span>
+          </div>
+        </div>
+        <div class="card-risk risk-zero">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div>
+          <span>Ban Risk: <strong>Zero</strong> — CRM only, no LinkedIn automation</span>
+        </div>
       </div>
 
       <!-- Cleverly -->
@@ -476,6 +594,17 @@
           <span class="pill">Cold Calling</span>
         </div>
         <div class="card-channels"><strong>Channels:</strong> LinkedIn + Cold Email + Cold Calling</div>
+        <div class="card-trial no-trial">
+          <span class="card-trial-icon">🤝</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">No Free Trial</span>
+            <span class="card-trial-note">Managed service — schedule a strategy call · Minimum $397/mo commitment</span>
+          </div>
+        </div>
+        <div class="card-risk risk-low">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div>
+          <span>Ban Risk: <strong>Low</strong> — humans do the outreach, not bots</span>
+        </div>
       </div>
 
       <!-- PhantomBuster -->
@@ -495,6 +624,17 @@
           <span class="pill">HubSpot Sync</span>
         </div>
         <div class="card-channels"><strong>Channels:</strong> LinkedIn + 15+ platforms</div>
+        <div class="card-trial has-trial">
+          <span class="card-trial-icon">🎁</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">14-Day Free Trial</span>
+            <span class="card-trial-note">No CC required · Full plan access · Auto-renews at $56/mo (annual)</span>
+          </div>
+        </div>
+        <div class="card-risk risk-very-high">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span></div>
+          <span>Ban Risk: <strong>High</strong> — headless browser, datacenter IPs detectable</span>
+        </div>
       </div>
 
       <!-- Dux-Soup -->
@@ -514,6 +654,17 @@
           <span class="pill">Agency Plans</span>
         </div>
         <div class="card-channels"><strong>Channels:</strong> LinkedIn only</div>
+        <div class="card-trial has-trial">
+          <span class="card-trial-icon">🎁</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">14-Day Free Trial</span>
+            <span class="card-trial-note">Free Starter tier also available · No CC required · Auto-renews at $11.25/mo</span>
+          </div>
+        </div>
+        <div class="card-risk risk-high">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span></div>
+          <span>Ban Risk: <strong>Moderate-High</strong> — Chrome extension, LinkedIn can fingerprint</span>
+        </div>
       </div>
 
     </div>
@@ -599,13 +750,23 @@
           </tr>
           <tr>
             <td class="row-label">Free Plan / Trial</td>
-            <td>✅ Free trial</td>
-            <td>❌ No public plan; quote only</td>
-            <td>✅ 7-day free trial</td>
-            <td class="highlight" style="color:var(--att)">✅ Free plan (up to 3 seats)</td>
-            <td>❌ No trial (managed service)</td>
-            <td>✅ 14-day free trial</td>
-            <td>✅ 14-day free trial</td>
+            <td class="highlight" style="color:var(--li)">✅ 30-day free trial · Full Core · No CC sometimes</td>
+            <td>❌ No trial · Demo call required · Quote only</td>
+            <td>✅ 7-day free trial · No CC required</td>
+            <td class="highlight" style="color:var(--att)">✨ Free plan forever (3 seats) · Not a trial</td>
+            <td>❌ No trial · Managed service · Min $397/mo</td>
+            <td>✅ 14-day free trial · No CC required</td>
+            <td>✅ 14-day trial + free Starter tier · No CC</td>
+          </tr>
+          <tr>
+            <td class="row-label">LinkedIn Ban Risk</td>
+            <td class="highlight" style="color:#22c55e">⬤ Zero — native LinkedIn product</td>
+            <td class="highlight" style="color:#22c55e">⬤ Zero — data only, never touches LinkedIn UI</td>
+            <td style="color:#eab308">⬤⬤⬤ Moderate — cloud automation, &lt;20 req/day safe</td>
+            <td class="highlight" style="color:#22c55e">⬤ Zero — CRM only, no automation</td>
+            <td style="color:#84cc16">⬤⬤ Low — humans execute, not bots</td>
+            <td style="color:#ef4444">⬤⬤⬤⬤⬤ High — headless browser, datacenter IPs</td>
+            <td style="color:#f97316">⬤⬤⬤⬤ Moderate-High — browser fingerprint risk</td>
           </tr>
           <tr>
             <td class="row-label">Starting Price</td>
@@ -793,6 +954,117 @@
           <div class="tier-bar-wrap"><div class="tier-bar" style="width:65%"></div></div>
           <span class="tier-price">$74.17/mo</span>
         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BAN RISK -->
+  <section>
+    <div class="section-title">⚠️ LinkedIn Account Ban Risk</div>
+    <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:var(--radius);padding:.9rem 1.1rem;margin-bottom:1.2rem;font-size:.82rem;color:#fca5a5;line-height:1.6;">
+      <strong style="color:#ef4444;">Critical context:</strong> LinkedIn's safe daily limits are approximately <strong style="color:#fca5a5;">20–25 connection requests/day</strong> and <strong style="color:#fca5a5;">30–40 messages/day</strong>. Low acceptance rates are often a faster ban trigger than raw volume. A suspended account means lost access to your entire network — treat this section seriously.
+    </div>
+    <div class="risk-grid">
+
+      <div class="risk-card" style="--accent:#22c55e">
+        <div class="risk-card-header">
+          <span class="risk-card-name">LinkedIn Sales Navigator</span>
+          <span class="risk-label" style="background:rgba(34,197,94,.12);color:#22c55e;">Zero Risk</span>
+        </div>
+        <div class="risk-dots">
+          <span class="dot-fill" style="--accent:#22c55e;background:#22c55e"></span>
+          <span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span>
+        </div>
+        <div class="risk-summary">LinkedIn's own product. Cannot get banned for using it. <strong>The only tool in this list with zero risk.</strong></div>
+        <div class="risk-note">Safe daily limits: unlimited searches · 50 InMails/mo</div>
+      </div>
+
+      <div class="risk-card" style="--accent:#22c55e">
+        <div class="risk-card-header">
+          <span class="risk-card-name">Cognism</span>
+          <span class="risk-label" style="background:rgba(34,197,94,.12);color:#22c55e;">Zero Risk</span>
+        </div>
+        <div class="risk-dots">
+          <span style="background:#22c55e;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span>
+        </div>
+        <div class="risk-summary">Data export platform only. <strong>Never automates any LinkedIn action.</strong> You use the data to reach out through other channels or manually.</div>
+        <div class="risk-note">Safe daily limits: N/A — no LinkedIn actions taken</div>
+      </div>
+
+      <div class="risk-card" style="--accent:#22c55e">
+        <div class="risk-card-header">
+          <span class="risk-card-name">Attio</span>
+          <span class="risk-label" style="background:rgba(34,197,94,.12);color:#22c55e;">Zero Risk</span>
+        </div>
+        <div class="risk-dots">
+          <span style="background:#22c55e;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span>
+        </div>
+        <div class="risk-summary">CRM platform only. <strong>Does not automate LinkedIn.</strong> Profile enrichment is passive data sync, not action automation.</div>
+        <div class="risk-note">Safe daily limits: N/A — no LinkedIn actions taken</div>
+      </div>
+
+      <div class="risk-card" style="--accent:#84cc16">
+        <div class="risk-card-header">
+          <span class="risk-card-name">Cleverly</span>
+          <span class="risk-label" style="background:rgba(132,204,22,.1);color:#84cc16;">Low Risk</span>
+        </div>
+        <div class="risk-dots">
+          <span style="background:#84cc16;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#84cc16;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span>
+        </div>
+        <div class="risk-summary"><strong>Humans execute the outreach,</strong> not bots. Actual people log into your account and send messages manually. This dramatically reduces detection risk — but your credentials are shared.</div>
+        <div class="risk-note">Risk is human error or volume creep by your account manager, not bot detection</div>
+      </div>
+
+      <div class="risk-card" style="--accent:#eab308">
+        <div class="risk-card-header">
+          <span class="risk-card-name">Meet Alfred</span>
+          <span class="risk-label" style="background:rgba(234,179,8,.1);color:#eab308;">Moderate Risk</span>
+        </div>
+        <div class="risk-dots">
+          <span style="background:#eab308;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#eab308;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#eab308;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span class="dot-empty"></span><span class="dot-empty"></span>
+        </div>
+        <div class="risk-summary">Cloud-based, runs without your browser open. <strong>Has built-in safety limits</strong> that throttle actions. Risk is manageable if you stay under ~15–20 connection requests/day and maintain high acceptance rates.</div>
+        <div class="risk-note">~1 in 20 users gets a warning at conservative settings · ~1 in 5 at aggressive</div>
+      </div>
+
+      <div class="risk-card" style="--accent:#f97316">
+        <div class="risk-card-header">
+          <span class="risk-card-name">Dux-Soup</span>
+          <span class="risk-label" style="background:rgba(249,115,22,.1);color:#f97316;">Moderate-High</span>
+        </div>
+        <div class="risk-dots">
+          <span style="background:#f97316;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#f97316;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#f97316;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#f97316;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span class="dot-empty"></span>
+        </div>
+        <div class="risk-summary">Runs as a <strong>Chrome extension inside your real browser session.</strong> LinkedIn can inspect browser behavior and fingerprint the extension. Risk increases with volume and account age.</div>
+        <div class="risk-note">Safe zone: &lt;15 req/day · Danger zone: 50+ req/day · High rejection rate = faster ban</div>
+      </div>
+
+      <div class="risk-card" style="--accent:#ef4444">
+        <div class="risk-card-header">
+          <span class="risk-card-name">PhantomBuster</span>
+          <span class="risk-label" style="background:rgba(239,68,68,.1);color:#ef4444;">High Risk</span>
+        </div>
+        <div class="risk-dots">
+          <span style="background:#ef4444;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#ef4444;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#ef4444;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#ef4444;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#ef4444;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+        </div>
+        <div class="risk-summary">Uses <strong>headless browsers running from datacenter IP addresses</strong> — a pattern LinkedIn actively detects. Suspensions are common among active users. Most power users have experienced at least one restriction.</div>
+        <div class="risk-note">Not recommended if a LinkedIn ban would damage your business</div>
       </div>
 
     </div>
