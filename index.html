@@ -790,6 +790,28 @@
             <td class="highlight" style="color:var(--apo)">Salesforce, HubSpot, Pipedrive, Marketo, Zapier, Outreach</td>
           </tr>
           <tr>
+            <td class="row-label">HubSpot Integration</td>
+            <td class="highlight" style="color:var(--li)">✅ Native bi-directional sync — contacts, accounts, activities auto-logged</td>
+            <td class="highlight" style="color:var(--cog)">✅ Native — push verified contacts &amp; intent data directly into HubSpot</td>
+            <td>⚡ Via Zapier/webhooks — not a native integration; requires setup</td>
+            <td style="color:var(--muted)">➖ Attio IS the CRM — use instead of HubSpot or sync via API/Zapier</td>
+            <td>✅ Direct HubSpot integration — contacts &amp; activity synced by account manager</td>
+            <td class="highlight" style="color:var(--pb)">✅ Native HubSpot integration — push enriched leads &amp; automation results</td>
+            <td>✅ HubSpot integration — syncs visited profiles, tags, campaign activity</td>
+            <td class="highlight" style="color:var(--apo)">✅ Native bi-directional sync — deals, contacts, sequences, tasks all synced</td>
+          </tr>
+          <tr>
+            <td class="row-label">Customized Outbound Messages</td>
+            <td>⚡ Limited — Message Assist (AI beta) for InMail only; basic variable insertion</td>
+            <td style="color:var(--muted)">➖ No outreach tool — data only; bring your own messaging platform</td>
+            <td class="highlight" style="color:var(--ma)">✅ Strong — AI personalization, custom variables, multi-step sequences per channel</td>
+            <td>✅ Email sequences with merge tags &amp; conditional logic via CRM workflows</td>
+            <td class="highlight" style="color:var(--clv)">✅ Done-for-you custom copy — account manager writes &amp; A/B tests messaging for you</td>
+            <td class="highlight" style="color:var(--pb)">✅ AI message writer + custom variables; per-Phantom message customization</td>
+            <td>⚡ Basic — first name, company variables; limited dynamic personalization</td>
+            <td class="highlight" style="color:var(--apo)">✅ Strong — AI email writer, custom variables, A/B testing, sequence-level rules</td>
+          </tr>
+          <tr>
             <td class="row-label">Free Plan / Trial</td>
             <td class="highlight" style="color:var(--li)">✅ 30-day free trial · Full Core · No CC sometimes</td>
             <td>❌ No trial · Demo call required · Quote only</td>
@@ -1249,29 +1271,21 @@
         card.classList.toggle('hidden', !visible.includes(i));
       });
 
-      // Also grey out table columns
-      const allCols = document.querySelectorAll('#compTable thead th');
-      const allTds  = document.querySelectorAll('#compTable tbody td');
-
-      if (f === 'all') {
-        allCols.forEach(c => c.style.opacity = '');
-        allTds.forEach(c => c.style.opacity = '');
-        return;
-      }
-
-      // col indices in table: 0=label, 1=SalesNav, 2=Cognism, 3=Alfred, 4=Attio, 5=Cleverly, 6=PB, 7=DuxSoup
+      // Hide/show table columns based on filter
+      // col indices: 0=label, 1=SalesNav, 2=Cognism, 3=Alfred, 4=Attio, 5=Cleverly, 6=PB, 7=DuxSoup, 8=Apollo
       const colVisible = visible.map(i => i + 1); // offset by 1 for label col
 
+      const allCols = document.querySelectorAll('#compTable thead th');
       allCols.forEach((c, ci) => {
         if (ci === 0) return;
-        c.style.opacity = colVisible.includes(ci) ? '' : '0.3';
+        c.style.display = colVisible.includes(ci) ? '' : 'none';
       });
 
       tableRows.forEach(row => {
         const tds = row.querySelectorAll('td');
         tds.forEach((td, ti) => {
           if (ti === 0) return;
-          td.style.opacity = colVisible.includes(ti) ? '' : '0.3';
+          td.style.display = colVisible.includes(ti) ? '' : 'none';
         });
       });
     });
