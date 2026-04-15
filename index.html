@@ -19,6 +19,7 @@
     --clv: #ef4444;
     --pb:  #eab308;
     --ds:  #14b8a6;
+    --apo: #e8531e;
     --radius: 8px;
     font-size: 15px;
   }
@@ -435,6 +436,7 @@
     <span><span class="dot" style="background:var(--clv)"></span>Cleverly</span>
     <span><span class="dot" style="background:var(--pb)"></span>PhantomBuster</span>
     <span><span class="dot" style="background:var(--ds)"></span>Dux-Soup</span>
+    <span><span class="dot" style="background:var(--apo)"></span>Apollo.io</span>
   </div>
 </div>
 
@@ -447,6 +449,8 @@
     <button class="filter-btn" data-filter="free">✅ Has Free Plan/Trial</button>
     <button class="filter-btn" data-filter="multichannel">📡 Multi-Channel</button>
     <button class="filter-btn" data-filter="ai">🤖 AI-Powered</button>
+    <button class="filter-btn" data-filter="riskzero">🛡️ Zero Ban Risk</button>
+    <button class="filter-btn" data-filter="risksafe">✅ Ban-Safe (Zero + Low)</button>
   </div>
 </div>
 
@@ -667,6 +671,36 @@
         </div>
       </div>
 
+      <!-- Apollo.io -->
+      <div class="tool-card" style="--accent:var(--apo)" data-tags="budget free multichannel ai">
+        <div class="card-header">
+          <div class="card-name">Apollo.io</div>
+          <span class="badge badge-type">All-in-One SaaS</span>
+        </div>
+        <div class="card-price">Free</div>
+        <div class="card-price-sub">Paid from $49/user/mo (Basic, annual)</div>
+        <div class="card-bestfor"><strong>Best for:</strong> Sales teams wanting Sales Navigator-level data + outreach sequences in one tool at lower cost</div>
+        <div class="pills">
+          <span class="pill accent">275M+ Contacts</span>
+          <span class="pill">Email Sequences</span>
+          <span class="pill">Built-in Dialer</span>
+          <span class="pill">Intent Data</span>
+          <span class="pill">AI Email Writer</span>
+        </div>
+        <div class="card-channels"><strong>Channels:</strong> Email + Phone + LinkedIn</div>
+        <div class="card-trial free-plan">
+          <span class="card-trial-icon">✨</span>
+          <div class="card-trial-body">
+            <span class="card-trial-label">Free Plan — Forever</span>
+            <span class="card-trial-note">50 email credits/mo + 5 phone credits · No CC required · Upgrades from $49/user/mo</span>
+          </div>
+        </div>
+        <div class="card-risk risk-low">
+          <div class="card-risk-bar"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div>
+          <span>Ban Risk: <strong>Low</strong> — Chrome ext enriches data, doesn't automate actions at scale</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -685,6 +719,7 @@
             <th class="tool-col" style="--accent:var(--clv)"><span class="th-accent"></span>Cleverly</th>
             <th class="tool-col" style="--accent:var(--pb)"><span class="th-accent"></span>PhantomBuster</th>
             <th class="tool-col" style="--accent:var(--ds)"><span class="th-accent"></span>Dux-Soup</th>
+            <th class="tool-col" style="--accent:var(--apo)"><span class="th-accent"></span>Apollo.io</th>
           </tr>
         </thead>
         <tbody>
@@ -697,6 +732,7 @@
             <td>Done-for-you B2B lead gen</td>
             <td>Multi-platform data extraction</td>
             <td>LinkedIn automation &amp; lead gen</td>
+            <td class="highlight" style="color:var(--apo)">All-in-one B2B prospecting, data &amp; sequencing</td>
           </tr>
           <tr>
             <td class="row-label">Product Type</td>
@@ -707,6 +743,7 @@
             <td>Managed service (agency)</td>
             <td>SaaS automation tool</td>
             <td>Chrome extension + cloud</td>
+            <td>SaaS platform + Chrome extension</td>
           </tr>
           <tr>
             <td class="row-label">LinkedIn Integration</td>
@@ -717,6 +754,7 @@
             <td>LinkedIn outreach managed for you</td>
             <td>Scrapes &amp; automates LinkedIn</td>
             <td class="highlight" style="color:var(--ds)">Deep — automates directly</td>
+            <td>Chrome extension enriches profiles — read-only, light automation</td>
           </tr>
           <tr>
             <td class="row-label">Outreach Channels</td>
@@ -727,6 +765,7 @@
             <td class="highlight" style="color:var(--clv)">LinkedIn + Email + Cold Call</td>
             <td class="highlight" style="color:var(--pb)">LinkedIn + 15+ platforms</td>
             <td>LinkedIn only</td>
+            <td class="highlight" style="color:var(--apo)">Email + Phone + LinkedIn</td>
           </tr>
           <tr>
             <td class="row-label">AI Capabilities</td>
@@ -737,6 +776,7 @@
             <td>AI personalization (Cold Email plan)</td>
             <td>AI filtering &amp; AI message writing</td>
             <td style="color:var(--muted)">Limited — activity-based</td>
+            <td class="highlight" style="color:var(--apo)">AI email writer, lead scoring, intent signals, predictive analytics</td>
           </tr>
           <tr>
             <td class="row-label">CRM / Integrations</td>
@@ -747,6 +787,7 @@
             <td>Direct CRM integration</td>
             <td>HubSpot, Zapier, Make, n8n, Salesforce</td>
             <td>Salesforce, HubSpot, Pipedrive, Zapier, Make</td>
+            <td class="highlight" style="color:var(--apo)">Salesforce, HubSpot, Pipedrive, Marketo, Zapier, Outreach</td>
           </tr>
           <tr>
             <td class="row-label">Free Plan / Trial</td>
@@ -757,6 +798,7 @@
             <td>❌ No trial · Managed service · Min $397/mo</td>
             <td>✅ 14-day free trial · No CC required</td>
             <td>✅ 14-day trial + free Starter tier · No CC</td>
+            <td class="highlight" style="color:var(--att)">✨ Free plan forever · 50 email + 5 phone credits/mo · No CC</td>
           </tr>
           <tr>
             <td class="row-label">LinkedIn Ban Risk</td>
@@ -767,6 +809,7 @@
             <td style="color:#84cc16">⬤⬤ Low — humans execute, not bots</td>
             <td style="color:#ef4444">⬤⬤⬤⬤⬤ High — headless browser, datacenter IPs</td>
             <td style="color:#f97316">⬤⬤⬤⬤ Moderate-High — browser fingerprint risk</td>
+            <td style="color:#84cc16">⬤⬤ Low — extension reads data, doesn't mass-automate actions</td>
           </tr>
           <tr>
             <td class="row-label">Starting Price</td>
@@ -777,6 +820,7 @@
             <td>$397/mo</td>
             <td>$56/mo (annual)</td>
             <td class="highlight" style="color:var(--ds)">$11.25/mo (annual)</td>
+            <td class="highlight" style="color:var(--apo)">Free → $49/user/mo (Basic, annual)</td>
           </tr>
           <tr>
             <td class="row-label">Pricing Model</td>
@@ -786,6 +830,7 @@
             <td>Per user/month</td>
             <td>Per campaign / service</td>
             <td class="highlight" style="color:var(--pb)">Per workspace (unlimited users)</td>
+            <td>Per user/month</td>
             <td>Per user/month</td>
           </tr>
           <tr>
@@ -797,6 +842,7 @@
             <td>Cold Call $3,995/mo</td>
             <td>Scale $352/mo (annual)</td>
             <td>Cloud Dux $74.17/mo (annual)</td>
+            <td>Organization ~$119/user/mo (annual)</td>
           </tr>
           <tr>
             <td class="row-label">Team / Agency</td>
@@ -807,6 +853,7 @@
             <td>✅ Dedicated account manager</td>
             <td>✅ Unlimited users on all plans</td>
             <td>✅ Team &amp; agency plans</td>
+            <td>✅ Team workspaces, permissions, shared sequences</td>
           </tr>
           <tr>
             <td class="row-label">Data Compliance</td>
@@ -817,6 +864,7 @@
             <td style="color:var(--muted)">Not specified</td>
             <td>GDPR-compliant, no fake profiles</td>
             <td>Safety limits built-in</td>
+            <td class="highlight" style="color:var(--apo)">GDPR, CCPA, SOC 2 Type II certified</td>
           </tr>
         </tbody>
       </table>
@@ -956,6 +1004,30 @@
         </div>
       </div>
 
+      <div class="pricing-card" style="--accent:var(--apo)">
+        <div class="tool-name">Apollo.io</div>
+        <div class="tier-row">
+          <span class="tier-label">Free</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:5%"></div></div>
+          <span class="tier-price">$0</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Basic</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:35%"></div></div>
+          <span class="tier-price">$49/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Pro</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:60%"></div></div>
+          <span class="tier-price">$79/mo</span>
+        </div>
+        <div class="tier-row">
+          <span class="tier-label">Org</span>
+          <div class="tier-bar-wrap"><div class="tier-bar" style="width:85%"></div></div>
+          <span class="tier-price">~$119/mo</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1067,6 +1139,20 @@
         <div class="risk-note">Not recommended if a LinkedIn ban would damage your business</div>
       </div>
 
+      <div class="risk-card" style="--accent:#84cc16">
+        <div class="risk-card-header">
+          <span class="risk-card-name">Apollo.io</span>
+          <span class="risk-label" style="background:rgba(132,204,22,.1);color:#84cc16;">Low Risk</span>
+        </div>
+        <div class="risk-dots">
+          <span style="background:#84cc16;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span style="background:#84cc16;width:14px;height:14px;border-radius:3px;display:inline-block"></span>
+          <span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span>
+        </div>
+        <div class="risk-summary">Apollo's Chrome extension <strong>enriches LinkedIn profiles with contact data</strong> — it reads information rather than automating actions like connection requests or mass messages. Primary outreach is via email and phone, which carries <strong>no LinkedIn ban risk at all.</strong></div>
+        <div class="risk-note">Risk is low but non-zero — avoid using any LinkedIn automation features at volume</div>
+      </div>
+
     </div>
   </section>
 
@@ -1140,12 +1226,15 @@
   const tableRows = document.querySelectorAll('#compTable tbody tr');
 
   // Map filter -> tool indices (0-based)
+  // 0=SalesNav, 1=Cognism, 2=MeetAlfred, 3=Attio, 4=Cleverly, 5=PhantomBuster, 6=DuxSoup, 7=Apollo
   const filterMap = {
-    all:          [0,1,2,3,4,5,6],
-    budget:       [2,3,5,6],       // <$60/mo: Meet Alfred ($29), Attio ($0-$29), PhantomBuster ($56), Dux-Soup ($11.25)
-    free:         [0,2,3,5,6],     // free trial or free plan
-    multichannel: [2,4,5],         // Meet Alfred, Cleverly, PhantomBuster
-    ai:           [0,1,2,3,4,5],   // all except Dux-Soup (limited AI)
+    all:          [0,1,2,3,4,5,6,7],
+    budget:       [2,3,5,6,7],     // <$60/mo: Meet Alfred, Attio, PhantomBuster, Dux-Soup, Apollo
+    free:         [0,2,3,5,6,7],   // free trial or free plan
+    multichannel: [2,4,5,7],       // Meet Alfred, Cleverly, PhantomBuster, Apollo
+    ai:           [0,1,2,3,4,5,7], // all except Dux-Soup (limited AI)
+    riskzero:     [0,1,3],         // Zero ban risk: SalesNav, Cognism, Attio
+    risksafe:     [0,1,3,4,7],     // Zero + Low: above + Cleverly, Apollo
   };
 
   filterBtns.forEach(btn => {
